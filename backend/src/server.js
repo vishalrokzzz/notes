@@ -3,15 +3,26 @@ import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "./config/db.js";
 import dotenv from "dotenv";
 import ratelimiter from "./middleware/rateLimiter.js";
+import cors from "cors"
 
 dotenv.config();
 
 const app=express();
 connectDB();
+app.listen(process.env.port,() => {
+    console.log("server started on port :",process.env.port);
+
+});
+
+app.use(cors({
+    origin:"http://localhost:5173",
+})); 
+
 
 app.use(express.json());
 
 app.use(ratelimiter);
+
 
 app.use((req,res,next)=> {
     console.log(`received a ${req.method} request from ${req.url}`);
@@ -25,8 +36,5 @@ app.use("/api/notes", notesRoutes);
 
 
 
-app.listen(process.env.port,() => {
-    console.log("server started on port :",process.env.port);
 
-});
 
