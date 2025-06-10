@@ -10,6 +10,11 @@ const CreatePage = () => {
   const navigate = useNavigate();
 
   const handleCreate = async () => {
+    if (!title.trim() && !content.trim()) {
+    toast.error("Title and Content are required!");
+    return;
+    }
+
     try {
       const posted = await axios.post("http://localhost:5001/api/notes", {
         title,
@@ -19,6 +24,7 @@ const CreatePage = () => {
       toast.success("Note created successfully!");
       setTitle("");
       setContent("");
+      navigate("/")
     } catch (error) {
       console.error("Failed to create note:", error);
       toast.error("Failed to create note!");
