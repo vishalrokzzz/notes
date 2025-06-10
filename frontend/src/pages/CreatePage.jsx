@@ -27,7 +27,11 @@ const CreatePage = () => {
       navigate("/")
     } catch (error) {
       console.error("Failed to create note:", error);
-      toast.error("Failed to create note!");
+      if (error.response.status === 429){
+        toast.error("Maximium submissions reached, try after some time!",{duration:4000,icon:"🏃‍♂️" })
+      } else{
+        toast.error("Failed to create notes!")
+      }
     }
   };
 
