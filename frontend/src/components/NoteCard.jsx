@@ -10,19 +10,26 @@ const NoteCard = ({ note, onDelete }) => {
 
   const handleDelete = async (e) => {
     e.preventDefault(); // prevent link navigation
+    if(!window.confirm("Are you sure about deleting this note?")) return;
     try {
       await api.delete(`/notes/${note._id}`);
       toast.success("Note deleted!");
       onDelete(note._id); // Inform parent to remove it from state
     } catch (error) {
       toast.error("Failed to delete note.");
-      console.error(error);
+      console.log("Error in handleDelete",error);
     }
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault(); // prevent link navigation
-    navigate(`/edit/${note._id}`);
+    
+    try {
+        await api.put(`/notes/${note._id}`);        
+    } catch (error) {
+        toast.error("error editing notes");
+        console.log(error);        
+    }
   };
 
   return (
