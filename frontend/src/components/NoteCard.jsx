@@ -51,7 +51,7 @@ const NoteCard = ({ note, onDelete }) => {
 
           {/* Edit & Delete Buttons */}
           <div className="flex gap-3">
-            <button onClick={handleEdit} className="btn btn-xs btn-outline btn-info tooltip" data-tip="Edit">
+            <button onClick={handleEdit} className="btn btn-xs btn-outline btn-primary tooltip" data-tip="Edit">
               <Pencil size={14} />
             </button>
             <button onClick={handleDelete} className="btn btn-xs btn-outline btn-error tooltip" data-tip="Delete">
