@@ -22,18 +22,13 @@ const NoteCard = ({ note, onDelete }) => {
   };
 
   const handleEdit = async (e) => {
-    e.preventDefault(); // prevent link navigation
+    e.preventDefault(); // prevent link navigation   
+    navigate(`/note/${note._id}`);    
     
-    try {
-        await api.put(`/notes/${note._id}`);        
-    } catch (error) {
-        toast.error("error editing notes");
-        console.log(error);        
-    }
   };
 
   return (
-    <Link to={`/notes/${note._id}`}>
+    <Link to={`/note/${note._id}`}>
       <div className="bg-base-100 shadow-xl rounded-xl border border-base-300 p-5 transition-transform hover:scale-[1.02] hover:shadow-2xl duration-300 relative">
         
         {/* Title */}
